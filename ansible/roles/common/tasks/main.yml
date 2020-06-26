@@ -1,6 +1,11 @@
----
-- name: install OS packages
-  include_tasks: "packages-{{ ansible_distribution }}.yml"
+---  
+- name: install OS packages (Ubuntu)
+  include_tasks: "packages-Ubuntu.yml"
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Linux Mint"
+
+- name: install OS packages (Fedora)
+  include_tasks: "packages-Fedora.yml"
+  when: ansible_distribution == "Fedora"
 
 - name: ensure main working dir exists
   become: true

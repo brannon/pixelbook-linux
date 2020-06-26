@@ -74,7 +74,7 @@ class CrasClient(object):
 
     def _cras(self, *args):
         cmd = [self.client_path] + list(args)
-        proc = subprocess.run(cmd, capture_output=True, encoding='utf-8')
+        proc = subprocess.run(cmd, stdout=subprocess.PIPE, encoding='utf-8')
         if proc.returncode != 0:
             raise Exception("Error calling cras_test_client. Return code: {}. Stderr: {}".format(proc.returncode, proc.stderr))
         return proc.stdout

@@ -33,6 +33,13 @@
 
 ### tweak touchpad pressure for libinput
 
+- name: Ensure /etc/libinput exists
+  become: true
+  file:
+    path: /etc/libinput
+    mode: 0755
+    state: directory
+
 - name: Copy libinput touchpad pressure tweak file
   become: true
   copy:

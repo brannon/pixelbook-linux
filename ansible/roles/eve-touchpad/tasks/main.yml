@@ -5,6 +5,9 @@
   become: true
   apt:
     name:
+      - autoconf
+      - automake
+      - autotools-dev
       - libgtest-dev
       - libjsoncpp-dev
       - libxi-dev
