@@ -108,6 +108,18 @@
     create_home: false
     groups: cras,audio
 
+- name: check if using AccountsService
+  stat:
+    path: /var/lib/AccountsService/users
+  register: accounts_service_users
+
+- name: hide cras user from login screen
+  become: true
+  copy:
+    src: AccountsService-users-cras
+    dest: /var/lib/AccountsService/users/cras
+  when: accounts_service_users.stat.exists == true 
+
 - name: add login user to cras group
   become: true
   command: "usermod -aG cras {{ login_user }}"
