@@ -94,3 +94,17 @@
 - name: Trigger udev to apply keyboard rules
   become: true
   command: "udevadm trigger"
+
+### xmodmap
+
+- name: Create $HOME/.xmodmap
+  template:
+    src: xmodmap.j2
+    dest: /home/{{ login_user }}/.xmodmap
+    mode: 0644
+
+- name: Create $HOME/.xinitrc
+  copy:
+    src: xinitrc
+    dest: /home/{{ login_user }}/.xinitrc
+    mode: 0644
